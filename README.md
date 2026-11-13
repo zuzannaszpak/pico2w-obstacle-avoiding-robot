@@ -1,6 +1,30 @@
 # pico2w-obstacle-avoiding-robot
 Autonomous obstacle-avoiding robot car built with a Raspberry Pi Pico 2 W, HC-SR04 ultrasonic sensor, SG90 servo, and L298N motor driver, programmed in MicroPython.
 
+## How It Works
+
+The HC-SR04 continuously measures the distance in front of the robot.
+
+If no obstacle is detected within the defined threshold, the robot continues moving forward.
+
+When an obstacle is detected:
+
+1. The robot stops.
+2. It moves slightly backward.
+3. The servo rotates the ultrasonic sensor to scan the left and right sides.
+4. The measured distances are compared.
+5. The robot turns toward the side with more free space.
+6. The servo returns to the center position and the robot continues moving.
+
+## Repository Structure
+
+```text
+pico2w-obstacle-avoiding-robot/
+├── README.md
+├── main.py
+├── hardware-diagram.json
+```
+
 ## Hardware Setup
 
 ### Components
@@ -70,3 +94,22 @@ A simple resistor voltage divider should not be used to power the Pico, because 
 
 ### Wiring Diagram
 <img width="1046" height="994" alt="image" src="https://github.com/user-attachments/assets/6ef7e4cd-092f-4a77-abd7-f69402b6631a" />
+
+The complete hardware layout is also included in the repository as hardware-diagram.json, which can be opened and edited in Wokwi.
+
+## Software
+
+The robot is programmed in MicroPython.
+
+The main control logic is stored in `main.py`.
+
+The software handles:
+
+- ultrasonic distance measurement,
+- servo-controlled scanning of the environment,
+- forward and backward movement,
+- left and right turns,
+- obstacle detection,
+- selection of the clearer direction when an obstacle is detected.
+
+To run the robot, copy `main.py` to the Raspberry Pi Pico 2 W and save it on the board as `main.py`. The script will then start automatically when the Pico is powered.
